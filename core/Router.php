@@ -17,11 +17,12 @@ class Router
 
     public function run()
     {
-        if (str_starts_with($_GET['path'] ?? '', 'public/')) {
-            if (!file_exists($_GET['path'] ?? ''))
+        if (str_starts_with($_SERVER['REQUEST_URI'], '/public/')) {
+            $path = ltrim($_SERVER['REQUEST_URI'], '/');
+            if (!file_exists($path))
                 Response::error(404);
 
-            readfile($_GET['path'] ?? '');
+            readfile($path);
             exit();
         }
 
@@ -41,13 +42,14 @@ class Router
 
     public function match(): bool
     {
-        $uri = rtrim(explode('?', $_GET['path'] ?? '')[0], '/');
+        $uri = str_replace('/~s335084', '', $_SERVER['REQUEST_URI']);
+        $uri = rtrim(explode('?', $uri)[0], '/');
         if (empty($uri))
             $uri = '/';
 
         foreach ($this->routes as $route => $parameters) {
             if (!preg_match($route, $uri, $matches))
-                return false;
+                continue;
 
             $this->parameters = $parameters;
             return true;

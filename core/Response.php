@@ -20,12 +20,12 @@ class Response
 
     public static function success(array $data = []): never
     {
-        self::result(array_merge(['status' => 'success'], $data));
+        self::result(array_merge(['success' => true], $data));
     }
 
     public static function failure(array $data = []): never
     {
-        self::result(array_merge(['status' => 'failure'], $data));
+        self::result(array_merge(['success' => false], $data));
     }
 
     public static function error(int $code, string $message = 'An error has occurred.'): never

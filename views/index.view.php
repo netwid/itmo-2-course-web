@@ -151,28 +151,12 @@
             </div>
             <div>
                 <button id="submit">Submit</button>
+                <button id="clear">Clear History</button>
             </div>
         </div>
     </div>
-    <div>
-        <table id="table">
-            <tr>
-                <th class="variable">X</th>
-                <th class="variable">Y</th>
-                <th class="variable">R</th>
-                <th>Current time</th>
-                <th>Execution time</th>
-                <th>Status</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-            </tr>
-        </table>
+    <div id="history">
+        <?php require_once 'views/historyTable.view.php'; ?>
     </div>
 </main>
 </body>
@@ -197,6 +181,16 @@
                 return false;
         });
 
+        $('#clear').click(function() {
+            $.ajax({
+                url: 'clearHistory',
+                type: 'GET',
+                success: function (data) {
+                    $('#history').html(data);
+                }
+            });
+        })
+
         $('#submit').click(function() {
             $.ajax({
                 url: 'sendPoint',
@@ -207,7 +201,7 @@
                     R: $('input[name=R]:checked').val()
                 },
                 success: function (data) {
-                    $('#table').append(data);
+                    $('#history').html(data);
                 }
             });
         })

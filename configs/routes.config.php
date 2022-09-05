@@ -8,6 +8,9 @@ return [
         'action' => [IndexController::class, 'index']
     ],
     '/sendPoint' => [
-        'action' =>[IndexController::class, 'sendPoint']
+        'action' => [IndexController::class, 'sendPoint']
+    ],
+    '/clearHistory' => [
+        'action' => [IndexController::class, 'clearHistory']
     ],
 ];

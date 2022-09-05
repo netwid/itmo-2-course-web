@@ -6,11 +6,12 @@ namespace core;
 
 class Validate
 {
-    public function intInRange(mixed $value, int $min, int $max): bool
+    public static function intInRange(mixed $value, int $min, int $max): bool
     {
-        if (!is_integer($value))
+        if (intval($value) != $value)
             return false;
 
+        $value = intval($value);
         if ($value < $min || $value > $max)
             return false;
 
