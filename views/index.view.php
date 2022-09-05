@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -149,6 +149,9 @@
                 <label for="R-5">5</label>
                 <input type="radio" name="R" value="5" id="R-5">
             </div>
+            <div>
+                <button id="submit">Submit</button>
+            </div>
         </div>
     </div>
     <div>
@@ -173,4 +176,41 @@
     </div>
 </main>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $('#Y').keypress(function (e) {
+            let charCode = (e.which) ? e.which : e.keyCode;
+
+            if (String.fromCharCode(charCode) === '-' && !($(this).val().length === 0))
+                return false;
+
+            if (String.fromCharCode(charCode).match(/[^\d-]/g))
+                return false;
+
+            let strNum = $(this).val() + String.fromCharCode(charCode);
+            let num = Number.parseInt(strNum);
+            if ($(this).val().length > 0 && (num < -3 || num > 5))
+                return false;
+
+            if (strNum.match(/-?0{2,}/g))
+                return false;
+        });
+
+        $('#submit').click(function() {
+            $.ajax({
+                url: 'sendPoint',
+                type: 'GET',
+                data: {
+                    X: $('#X').val(),
+                    Y: $('#Y').val(),
+                    R: $('input[name=R]:checked').val()
+                },
+                success: function (data) {
+                    $('#table').append(data);
+                }
+            });
+        })
+    });
+</script>
 </html>
