@@ -1,5 +1,11 @@
 <?php
 
+ini_set('session.gc_maxlifetime', 6048000);
+ini_set('session.use_only_cookies', 0);
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL & ~E_WARNING);
+
 use core\Router;
 
 spl_autoload_register(function($class) {
@@ -8,4 +14,4 @@ spl_autoload_register(function($class) {
         require $path;
 });
 
-# (new Router())->run();
+(new Router())->run();

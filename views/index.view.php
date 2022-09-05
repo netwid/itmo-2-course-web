@@ -113,7 +113,7 @@
     <div class="first_row">
         <div>
             <!-- селектор атрибута -->
-            <img src="/public/areas.png" alt="" id="image">
+            <img src="public/areas.png" alt="" id="image">
         </div>
         <!-- селектор дочернего элемента -->
         <div class="input">

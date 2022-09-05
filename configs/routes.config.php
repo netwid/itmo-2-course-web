@@ -2,7 +2,12 @@
 
 use controllers\IndexController;
 
+# Without access rights because not needed
 return [
-    '/' => [IndexController::class, 'index'],
-
+    '/' => [
+        'action' => [IndexController::class, 'index']
+    ],
+    '/sendPoint' => [
+        'action' =>[IndexController::class, 'sendPoint']
+    ],
 ];
