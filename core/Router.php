@@ -9,12 +9,14 @@ class Router
     private array $routes = [];
     protected array $parameters = [];
 
-    public function __construct() {
+    public function __construct()
+    {
         foreach ((require 'configs/routes.config.php') as $route => $parameters)
             $this->routes['#^' . preg_replace('/{([a-z]+):([^}]+)}/', '(?P<\1>\2)', $route) . '$#'] = $parameters;
     }
 
-    public function run() {
+    public function run()
+    {
         if (str_starts_with($_GET['path'] ?? '', 'public/')) {
             if (!file_exists($_GET['path'] ?? ''))
                 Response::error(404);
@@ -37,7 +39,8 @@ class Router
         } else Response::error(404);
     }
 
-    public function match(): bool {
+    public function match(): bool
+    {
         $uri = rtrim(explode('?', $_GET['path'] ?? '')[0], '/');
         if (empty($uri))
             $uri = '/';
