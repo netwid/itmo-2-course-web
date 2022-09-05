@@ -16,9 +16,9 @@
             <td><?= $row['executionTime'] ?></td>
             <td>
                 <?php if ($row['isHit']): ?>
-                    <span class="hit">Ok</span>
+                    <span class="green">Ok</span>
                 <?php else: ?>
-                    <span class="hit">Fail</span>
+                    <span class="red">Fail</span>
                 <?php endif; ?>
             </td>
         </tr>

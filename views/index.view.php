@@ -102,6 +102,14 @@
             width: 70px;
             text-align: center;
         }
+
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
     </style>
 </head>
 <!-- селектор класса -->
@@ -199,10 +207,13 @@
                     X: $('#X').val(),
                     Y: $('#Y').val(),
                     R: $('input[name=R]:checked').val()
-                },
-                success: function (data) {
-                    $('#history').html(data);
                 }
+            })
+            .done(function (data) {
+                $('#history').html(data);
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText);
             });
         })
     });
