@@ -1,1 +1,1 @@
-# itmo-web-1
+# itmo-2-course-web
